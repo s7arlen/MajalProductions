@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majal Productions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6B1E2F;
+            --primary-dark: #4A1420;
+            --primary-light: #8B2E40;
+            --secondary: #D4647D;
+            --secondary-light: #E8959F;
+            --accent: #B8586A;
+            --gold: #C9954A;
+            --gold-light: #E4B87A;
+            --bg-light: #FBF5F3;
+            --bg-warm: #F5EBE8;
+            --text-dark: #2B2B2B;
+            --text-light: #FBF5F3;
+            --border-color: #E8D5D0;
+            --nav-height: 80px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--bg-light);
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: rgba(251, 245, 243, 0.88);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(107, 30, 47, 0.1);
+            box-shadow: 0 4px 30px rgba(107, 30, 47, 0.08);
+            animation: headerReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @keyframes headerReveal {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            object-fit: contain;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+        }
+
+
+        .logo-text .main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            animation: logoTextEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+        }
+
+        @keyframes logoTextEntry {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ── NAV TABS ── */
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(107, 30, 47, 0.12);
+            border-radius: 50px;
+            padding: 6px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .nav-pill {
+            position: absolute;
+            height: calc(100% - 12px);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50px;
+            top: 6px;
+            left: 6px;
+            transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(107, 30, 47, 0.35);
+            z-index: 0;
+        }
+
+        .nav-tabs li {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-tabs a {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.5rem 1.05rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.2px;
+            border-radius: 50px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .nav-tabs a .ni {
+            font-size: 0.72rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-tabs a:hover .ni {
+            transform: scale(1.25) rotate(-5deg);
+        }
+
+        .nav-tabs a:hover {
+            color: white;
+        }
+
+        .nav-tabs a.active {
+            color: white;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px rgba(212, 100, 125, 0.4);
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 25px rgba(212, 100, 125, 0.5);
+            color: white;
+        }
+
+        /* ── HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            background: rgba(251, 245, 243, 0.97);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.25rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 50px rgba(107, 30, 47, 0.15);
+            z-index: 999;
+        }
+
+        .mobile-nav.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+            display: flex;
+        }
+
+        .mobile-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav a:hover {
+            background: var(--bg-warm);
+            border-left-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .mobile-nav .mob-cta {
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white !important;
+            justify-content: center;
+            border-radius: 10px;
+            border-left: none !important;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(155deg, var(--primary-dark) 0%, var(--primary) 50%, #9B3A50 100%);
+            color: var(--text-light);
+            padding: calc(var(--nav-height) + 5rem) 5rem 7rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .hero-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 149, 74, .22) 0%, transparent 65%);
+            top: -200px;
+            right: -100px;
+            animation: orbF1 12s ease-in-out infinite;
+        }
+
+        .hero-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 100, 125, .18) 0%, transparent 65%);
+            bottom: -150px;
+            left: -100px;
+            animation: orbF2 15s ease-in-out infinite;
+        }
+
+        .hero-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, .06) 0%, transparent 65%);
+            top: 35%;
+            left: 40%;
+            animation: orbF3 9s ease-in-out infinite;
+        }
+
+        @keyframes orbF1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            33% {
+                transform: translate(-30px, 20px)
+            }
+
+            66% {
+                transform: translate(20px, -15px)
+            }
+        }
+
+        @keyframes orbF2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            33% {
+                transform: translate(25px, -20px)
+            }
+
+            66% {
+                transform: translate(-15px, 10px)
+            }
+        }
+
+        @keyframes orbF3 {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            50% {
+                transform: translate(-20px, 15px)
+            }
+        }
+
+        .hero-dots {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 0.38rem 1.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.6rem;
+            animation: fdDown 0.8s 0.2s both;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge i {
+            color: var(--gold-light);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.4
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fdUp 0.9s 0.3s both;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.22rem);
+            opacity: 0.9;
+            line-height: 1.8;
+            max-width: 640px;
+            margin: 0 auto 2.5rem;
+            animation: fdUp 0.9s 0.4s both;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-bottom: 5rem;
+            animation: fdUp 0.9s 0.5s both;
+        }
+
+        @keyframes fdUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes fdDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .btn {
+            padding: 0.9rem 2.1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 0.93rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, .15);
+            opacity: 0;
+            transition: opacity .3s;
+            border-radius: inherit;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--primary-dark);
+            box-shadow: 0 8px 25px rgba(201, 149, 74, .4);
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 15px 35px rgba(201, 149, 74, .5);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, .45);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, .1);
+            border-color: white;
+        }
+
+        .btn-rose {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            box-shadow: 0 8px 25px rgba(212, 100, 125, .35);
+        }
+
+        .btn-rose:hover {
+            box-shadow: 0 15px 35px rgba(212, 100, 125, .5);
+        }
+
+        /* ── STATS ROW ── */
+        .stats-row {
+            position: relative;
+            z-index: 5;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 0 2rem;
+            transform: translateY(50%);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(107, 30, 47, 0.18);
+            border-top: 4px solid var(--secondary);
+            animation: statPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 70px rgba(107, 30, 47, .22);
+        }
+
+        .stat-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .stat-card:nth-child(1) {
+            animation-delay: .1s
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: .2s
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: .3s
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: .4s
+        }
+
+        @keyframes statPop {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1)
+            }
+        }
+
+        .stat-icon {
+            font-size: 1.4rem;
+            color: var(--secondary-light);
+            margin-bottom: .8rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: .5rem;
+        }
+
+        .stat-number span {
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: .82rem;
+            letter-spacing: .5px;
+        }
+
+        /* ── SECTIONS BASE ── */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .bg-white {
+            background: white;
+            max-width: 100%;
+        }
+
+        .bg-warm {
+            background: var(--bg-warm);
+            max-width: 100%;
+        }
+
+        .bg-white .section-inner,
+        .bg-warm .section-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            color: var(--primary);
+            margin-bottom: .7rem;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1.02rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .divider {
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold));
+            margin-bottom: 1.5rem;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .divider::after {
+            content: '';
+            position: absolute;
+            left: 58px;
+            top: 0;
+            width: 10px;
+            height: 4px;
+            background: var(--secondary-light);
+            border-radius: 2px;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .rv {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .rvl {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .rvr {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .rvs {
+            opacity: 0;
+            transform: scale(.9);
+            transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .rv.on,
+        .rvl.on,
+        .rvr.on,
+        .rvs.on {
+            opacity: 1;
+            transform: none;
+        }
+
+        .d1 {
+            transition-delay: .1s
+        }
+
+        .d2 {
+            transition-delay: .2s
+        }
+
+        .d3 {
+            transition-delay: .3s
+        }
+
+        .d4 {
+            transition-delay: .4s
+        }
+
+        .d5 {
+            transition-delay: .5s
+        }
+
+        /* ── ABOUT ── */
+        #about {
+            padding-top: calc(6rem + 4rem);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img-wrap {
+            position: relative;
+        }
+
+        .about-img-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -15px -15px 15px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            z-index: 0;
+            transition: transform .5s ease;
+        }
+
+        .about-img-wrap:hover::before {
+            transform: translate(6px, 6px);
+        }
+
+        .about-img-wrap img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 25px 60px rgba(107, 30, 47, .2);
+            position: relative;
+            z-index: 1;
+            transition: transform .5s ease;
+        }
+
+        .about-img-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.65rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 1.4rem;
+            line-height: 1.9;
+        }
+
+        .feat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feat-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1.15rem 1.3rem;
+            background: white;
+            border-radius: 12px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 5px 20px rgba(107, 30, 47, .06);
+            transition: all .3s ease;
+        }
+
+        .feat-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(107, 30, 47, .12);
+            border-left-color: var(--gold);
+        }
+
+        .feat-card .fi {
+            color: var(--secondary);
+            font-size: 1.35rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feat-card h4 {
+            color: var(--primary);
+            margin-bottom: .2rem;
+            font-size: .93rem;
+        }
+
+        .feat-card p {
+            color: #777;
+            font-size: .83rem;
+            margin: 0;
+        }
+
+        /* ── PRODUCTS ── */
+        .prod-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .prod-card {
+            background: var(--bg-light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all .45s cubic-bezier(.34, 1.56, .64, 1);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
+            position: relative;
+        }
+
+        .prod-card:hover {
+            transform: translateY(-14px) scale(1.01);
+            box-shadow: 0 35px 70px rgba(107, 30, 47, .18);
+        }
+
+        .prod-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--primary-dark);
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: .3rem .8rem;
+            border-radius: 50px;
+            z-index: 2;
+        }
+
+        .prod-img {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .prod-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .prod-card:hover .prod-img img {
+            transform: scale(1.08);
+        }
+
+        .prod-img-ov {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(107, 30, 47, .45));
+        }
+
+        .prod-body {
+            padding: 1.8rem;
+        }
+
+        .prod-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.35rem;
+        }
+
+        .prod-feats {
+            list-style: none;
+            margin-bottom: 1.4rem;
+        }
+
+        .prod-feats li {
+            padding: .38rem 0 .38rem 1.5rem;
+            position: relative;
+            color: #555;
+            font-size: .9rem;
+            border-bottom: 1px solid rgba(107, 30, 47, .05);
+        }
+
+        .prod-feats li:last-child {
+            border-bottom: none;
+        }
+
+        .prod-feats li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: .58rem;
+            top: .6rem;
+        }
+
+        .prod-tag {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: .86rem;
+            margin-bottom: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        /* ── COMPARISON ── */
+        .comp-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(107, 30, 47, .1);
+        }
+
+        .comp-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1.3rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: .92rem;
+        }
+
+        .comp-table td {
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: .9rem;
+        }
+
+        .comp-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comp-table tbody tr {
+            transition: background .2s;
+        }
+
+        .comp-table tbody tr:hover {
+            background: var(--bg-light);
+        }
+
+        .fn {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .ck {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* ── TESTIMONIALS ── */
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testi-card {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 2.2rem;
+            position: relative;
+            transition: all .4s cubic-bezier(.34, 1.56, .64, 1);
+            box-shadow: 0 5px 20px rgba(107, 30, 47, .06);
+            overflow: hidden;
+        }
+
+        .testi-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: var(--secondary);
+            opacity: .07;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .testi-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 50px rgba(107, 30, 47, .14);
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: .95rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .testi-txt {
+            color: #555;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: .92rem;
+        }
+
+        .auth-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .auth-av {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: .95rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(107, 30, 47, .25);
+        }
+
+        .auth-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: .92rem;
+        }
+
+        .auth-loc {
+            color: var(--accent);
+            font-size: .8rem;
+        }
+
+        /* ── GALLERY ── */
+        .gal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 280px 280px;
+            gap: 1.2rem;
+        }
+
+        .gal-grid .gi:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1
+        }
+
+        .gal-grid .gi:nth-child(2) {
+            grid-column: 2;
+            grid-row: 1/3
+        }
+
+        .gal-grid .gi:nth-child(3) {
+            grid-column: 3;
+            grid-row: 1
+        }
+
+        .gal-grid .gi:nth-child(4) {
+            grid-column: 1;
+            grid-row: 2
+        }
+
+        .gal-grid .gi:nth-child(5) {
+            grid-column: 3;
+            grid-row: 2
+        }
+
+        .gi {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(107, 30, 47, .12);
+        }
+
+        .gi img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .gi:hover img {
+            transform: scale(1.1);
+        }
+
+        .gal-ov {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(107, 30, 47, .85), transparent 55%);
+            opacity: 0;
+            transition: opacity .4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gi:hover .gal-ov {
+            opacity: 1;
+        }
+
+        .gal-ov-txt {
+            color: white;
+            font-weight: 600;
+            font-size: .88rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        /* Lightbox */
+        .lbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+        }
+
+        .lbox.on {
+            display: flex;
+        }
+
+        .lbox img {
+            max-width: 88vw;
+            max-height: 82vh;
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+        }
+
+        .lbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, .1);
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+
+        .lbox-close:hover {
+            background: var(--secondary);
+        }
+
+        /* ── FAQ ── */
+        .faq-cont {
+            max-width: 820px;
+            margin: 2rem auto 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: box-shadow .3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(107, 30, 47, .1);
+        }
+
+        .faq-q {
+            background: white;
+            color: var(--primary);
+            padding: 1.35rem 1.7rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background .3s;
+            gap: 1rem;
+        }
+
+        .faq-item.act .faq-q {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .faq-ico {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(107, 30, 47, .08);
+            flex-shrink: 0;
+            transition: all .4s cubic-bezier(.34, 1.56, .64, 1);
+            font-size: .78rem;
+        }
+
+        .faq-item.act .faq-ico {
+            background: rgba(255, 255, 255, .2);
+            transform: rotate(180deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s cubic-bezier(.16, 1, .3, 1), padding .3s;
+            background: var(--bg-light);
+            padding: 0 1.7rem;
+        }
+
+        .faq-item.act .faq-a {
+            max-height: 400px;
+            padding: 1.5rem 1.7rem;
+        }
+
+        .faq-a p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ── CONTACT ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .cf-wrap {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(107, 30, 47, .1);
+        }
+
+        .cf-wrap h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.45rem;
+        }
+
+        .form-row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .fg {
+            margin-bottom: 1.2rem;
+        }
+
+        .fg label {
+            display: block;
+            margin-bottom: .4rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: .86rem;
+        }
+
+        .fg input,
+        .fg textarea {
+            width: 100%;
+            padding: .85rem 1.05rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Lato', sans-serif;
+            font-size: .92rem;
+            transition: all .3s;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .fg input:focus,
+        .fg textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(212, 100, 125, .1);
+        }
+
+        .fg textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .ci-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .ic {
+            background: white;
+            padding: 1.7rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(107, 30, 47, .07);
+            border-left: 5px solid var(--secondary);
+            display: flex;
+            gap: 1.1rem;
+            align-items: flex-start;
+            transition: all .3s;
+        }
+
+        .ic:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 40px rgba(107, 30, 47, .12);
+            border-left-color: var(--gold);
+        }
+
+        .ic-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: .95rem;
+            flex-shrink: 0;
+        }
+
+        .ic h4 {
+            color: var(--primary);
+            margin-bottom: .35rem;
+            font-weight: 700;
+        }
+
+        .ic p {
+            color: #666;
+            font-size: .88rem;
+            margin-bottom: .2rem;
+        }
+
+        .ic a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color .2s;
+        }
+
+        .ic a:hover {
+            color: var(--primary);
+        }
+
+        .soc-row {
+            display: flex;
+            gap: .9rem;
+            margin-top: .8rem;
+        }
+
+        .soc-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
+            font-size: .85rem;
+        }
+
+        .soc-btn.fb {
+            background: #1877F2
+        }
+
+        .soc-btn.yt {
+            background: #FF0000
+        }
+
+        .soc-btn.ig {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045)
+        }
+
+        .soc-btn:hover {
+            transform: translateY(-4px) scale(1.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold), var(--secondary));
+        }
+
+        footer::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 100, 125, .05) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .fl-logo .main {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1.5px;
+        }
+
+        .fl-logo .tag {
+            font-size: .62rem;
+            color: var(--secondary-light);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .fl-desc {
+            color: rgba(255, 255, 255, .62);
+            font-size: .88rem;
+            line-height: 1.8;
+            margin: 1.2rem 0 1.5rem;
+        }
+
+        .fc h4 {
+            color: var(--gold-light);
+            font-size: .76rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.1rem;
+        }
+
+        .fc ul {
+            list-style: none;
+        }
+
+        .fc li {
+            margin-bottom: .6rem;
+        }
+
+        .fc a {
+            color: rgba(255, 255, 255, .62);
+            text-decoration: none;
+            font-size: .87rem;
+            transition: all .2s;
+        }
+
+        .fc a:hover {
+            color: var(--secondary-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, .48);
+            font-size: .83rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom a {
+            color: var(--secondary-light);
+            text-decoration: none;
+        }
+
+        /* ── SCROLL-TO-TOP ── */
+        .stt {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(107, 30, 47, .4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .4s cubic-bezier(.34, 1.56, .64, 1);
+            z-index: 998;
+        }
+
+        .stt.on {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stt:hover {
+            transform: translateY(-4px) scale(1.1);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1024px) {
+            :root {
+                --nav-height: 70px;
+            }
+
+            .nav-tabs,
+            .nav-cta {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .logo-img {
+                height: 48px;
+            }
+
+            .logo-text .main {
+                font-size: 1.2rem;
+            }
+
+            .about-grid,
+            .prod-grid,
+            .testi-grid,
+            .feat-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .gal-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto
+            }
+
+            .gal-grid .gi {
+                grid-column: auto !important;
+                grid-row: auto !important;
+                height: 220px
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .form-row2 {
+                grid-template-columns: 1fr
+            }
+
+            .footer-inner {
+                padding: 0 1rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: calc(var(--nav-height) + 3rem) 1rem 5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+                padding: 0 0.5rem;
+            }
+
+            .about-img-wrap {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .about-img-wrap::before {
+                inset: -8px -8px 8px 8px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:480px) {
+            .logo-img {
+                height: 42px;
+            }
+
+            .logo-text .main {
+                font-size: 1.1rem;
+            }
+
+            .hero {
+                padding: calc(var(--nav-height) + 2rem) 0.8rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+                line-height: 1.2;
+            }
+
+            .stats-row {
+                gap: .8rem;
+                padding: 0 0.8rem;
+                transform: translateY(20%);
+            }
+
+            .footer-inner {
+                padding: 0 0.8rem;
+            }
+
+            section {
+                padding: 3rem 0.8rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: stretch;
+                padding-bottom: 3rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .btn {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .comp-table th,
+            .comp-table td {
+                padding: 0.8rem 0.6rem;
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .comp-table {
+            min-width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header id="hdr">
+        <div class="header-container">
+            <a href="#home" class="logo">
+                <img src="Majal-Production-1.png" alt="Majal Productions Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="main">Majal Productions</span>
+                </div>
+            </a>
+
+            <div class="nav-wrap">
+                <nav>
+                    <ul class="nav-tabs" id="navTabs">
+                        <div class="nav-pill" id="navPill"></div>
+                        <li><a href="#home" class="nl active" data-sec="home"><i class="fas fa-home ni"></i>Home</a>
+                        </li>
+                        <li><a href="#about" class="nl" data-sec="about"><i class="fas fa-seedling ni"></i>About</a>
+                        </li>
+                        <li><a href="#products" class="nl" data-sec="products"><i
+                                    class="fas fa-fire ni"></i>Products</a></li>
+                        <li><a href="#testimonials" class="nl" data-sec="testimonials"><i
+                                    class="fas fa-star ni"></i>Reviews</a></li>
+                        <li><a href="#gallery" class="nl" data-sec="gallery"><i class="fas fa-images ni"></i>Gallery</a>
+                        </li>
+                        <li><a href="#faq" class="nl" data-sec="faq"><i class="fas fa-question-circle ni"></i>FAQ</a>
+                        </li>
+                        <li><a href="#contact" class="nl" data-sec="contact"><i
+                                    class="fas fa-envelope ni"></i>Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="#contact" class="nav-cta">Get Quote <i class="fas fa-arrow-right"
+                        style="font-size:.73rem"></i></a>
+            </div>
+
+            <button class="hamburger" id="hamBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mNav">
+        <a href="#home"><i class="fas fa-home" style="width:20px;color:var(--secondary)"></i>Home</a>
+        <a href="#about"><i class="fas fa-seedling" style="width:20px;color:var(--secondary)"></i>About</a>
+        <a href="#products"><i class="fas fa-fire" style="width:20px;color:var(--secondary)"></i>Products</a>
+        <a href="#testimonials"><i class="fas fa-star" style="width:20px;color:var(--secondary)"></i>Testimonials</a>
+        <a href="#gallery"><i class="fas fa-images" style="width:20px;color:var(--secondary)"></i>Gallery</a>
+        <a href="#faq"><i class="fas fa-question-circle" style="width:20px;color:var(--secondary)"></i>FAQ</a>
+        <a href="#contact"><i class="fas fa-envelope" style="width:20px;color:var(--secondary)"></i>Contact</a>
+        <a href="#contact" class="mob-cta"><i class="fas fa-comments"></i> Get a Quote</a>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="home">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+        <div class="hero-dots"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-award"></i> Trusted by 3000+ Families Across Coastal Karnataka
+            </div>
+            <h1>Experience <em>Smokeless</em><br>Living Today</h1>
+            <p>Revolutionary 3-in-1 Astra Ole & Premium Stainless Steel Boilers — crafted with tradition, engineered for
+                the modern family.</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn btn-gold"><i class="fas fa-fire"></i> Explore Products</a>
+                <a href="#contact" class="btn btn-ghost"><i class="fas fa-phone"></i> Request Quote</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about">
+        <div class="divider rv"></div>
+        <h2 class="section-title rv">About Majal Productions</h2>
+        <p class="section-subtitle rv">Pioneering smokeless cooking solutions from the heart of Bantwal, Karnataka for
+            over a decade</p>
+
+        <div class="about-grid">
+            <div class="about-img-wrap rvl">
+                <img src="http://www.majalproductions.com/wp-content/uploads/2019/05/Majal-Production.png"
+                    alt="Majal Production Astra Ole"
+                    onerror="this.style.background='linear-gradient(135deg,var(--primary),var(--primary-light))';this.style.minHeight='300px'">
+            </div>
+            <div class="about-text rvr">
+                <h3>Our Story</h3>
+                <p>Even while most people now cook using modern stoves and ovens, many still rely on traditional mud
+                    stoves — especially in coastal Karnataka, where they're used for cooking rice and sanitary purposes.
+                </p>
+                <p>The original mud stove required enormous time and firewood. With rapidly rising fuel costs, we
+                    developed the innovative 3-in-1 Astra Ole, which serves both cooking and water heating with just a
+                    single fire.</p>
+                <p>Built in Bantwal, Dakshina Kannada (Mangaluru), our smokeless burner has been trusted by over 3,000
+                    families and continues to grow every day.</p>
+                <div class="feat-grid">
+                    <div class="feat-card rv d1"><i class="fas fa-check-circle fi"></i>
+                        <div>
+                            <h4>100% Smokeless</h4>
+                            <p>Clean kitchen environment</p>
+                        </div>
+                    </div>
+                    <div class="feat-card rv d2"><i class="fas fa-leaf fi"></i>
+                        <div>
+                            <h4>Eco-Friendly</h4>
+                            <p>Uses agricultural waste</p>
+                        </div>
+                    </div>
+                    <div class="feat-card rv d3"><i class="fas fa-hammer fi"></i>
+                        <div>
+                            <h4>Easy Maintenance</h4>
+                            <p>Simple to maintain & repair</p>
+                        </div>
+                    </div>
+                    <div class="feat-card rv d4"><i class="fas fa-shield-alt fi"></i>
+                        <div>
+                            <h4>Durable</h4>
+                            <p>20+ years guaranteed life</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PRODUCTS ═══ -->
+    <section id="products" style="background:white;max-width:100%">
+        <div style="max-width:1400px;margin:0 auto;padding:6rem 2rem">
+            <div class="divider rv"></div>
+            <h2 class="section-title rv">Our Premium Products</h2>
+            <p class="section-subtitle rv">Engineered for durability, efficiency, and peace of mind in every home</p>
+
+            <div class="prod-grid">
+                <div class="prod-card rv d1">
+                    <span class="prod-badge">⭐ Bestseller</span>
+                    <div class="prod-img">
+                        <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-7.png"
+                            alt="Majal 3 in 1 Astra Ole"
+                            onerror="this.style.background='linear-gradient(135deg,var(--primary),var(--primary-light))'">
+                        <div class="prod-img-ov"></div>
+                    </div>
+                    <div class="prod-body">
+                        <h3>Majal 3-in-1 Astra Ole</h3>
+                        <ul class="prod-feats">
+                            <li>100% smokeless cooking & heating</li>
+                            <li>Single fire operation for all needs</li>
+                            <li>Uses agricultural waste as fuel</li>
+                            <li>Simple, easy maintenance</li>
+                            <li>Long-lasting durability</li>
+                        </ul>
+                        <p class="prod-tag"><i class="fas fa-check-circle"></i> Perfect for traditional cooking</p>
+                        <a href="#contact" class="btn btn-rose" style="width:100%;justify-content:center">Request Quote
+                            <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="prod-card rv d2">
+                    <span class="prod-badge"
+                        style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white">Premium</span>
+                    <div class="prod-img">
+                        <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-4.png"
+                            alt="SS Steel Boiler Insulated"
+                            onerror="this.style.background='linear-gradient(135deg,var(--primary),var(--primary-light))'">
+                        <div class="prod-img-ov"></div>
+                    </div>
+                    <div class="prod-body">
+                        <h3>SS Steel Boiler — Insulated</h3>
+                        <ul class="prod-feats">
+                            <li>Premium stainless steel construction</li>
+                            <li>Superior thermal insulation</li>
+                            <li>Multiple capacity options</li>
+                            <li>Rust-free, long-lasting</li>
+                            <li>Quality & leakage tested</li>
+                        </ul>
+                        <p class="prod-tag"><i class="fas fa-check-circle"></i> Maximum energy efficiency</p>
+                        <a href="#contact" class="btn btn-rose" style="width:100%;justify-content:center">Request Quote
+                            <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="prod-card rv d3">
+                    <span class="prod-badge"
+                        style="background:linear-gradient(135deg,#555,#777);color:white">Standard</span>
+                    <div class="prod-img">
+                        <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-6.png"
+                            alt="SS Steel Boiler Standard"
+                            onerror="this.style.background='linear-gradient(135deg,var(--primary),var(--primary-light))'">
+                        <div class="prod-img-ov"></div>
+                    </div>
+                    <div class="prod-body">
+                        <h3>SS Steel Boiler — Standard</h3>
+                        <ul class="prod-feats">
+                            <li>Heavy duty stainless steel</li>
+                            <li>Reliable, consistent performance</li>
+                            <li>Multiple capacity options</li>
+                            <li>Leakage tested & certified</li>
+                            <li>20+ years guaranteed life</li>
+                        </ul>
+                        <p class="prod-tag"><i class="fas fa-check-circle"></i> Affordable & durable choice</p>
+                        <a href="#contact" class="btn btn-rose" style="width:100%;justify-content:center">Request Quote
+                            <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ COMPARISON ═══ -->
+    <section style="background:var(--bg-warm);max-width:100%">
+        <div style="max-width:1400px;margin:0 auto;padding:6rem 2rem">
+            <div class="divider rv"></div>
+            <h2 class="section-title rv">Product Comparison</h2>
+            <p class="section-subtitle rv">Find the perfect product for your needs at a glance</p>
+            <div class="rvs table-container">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th><i class="fas fa-fire" style="margin-right:7px;color:var(--gold-light)"></i>Astra Ole
+                            </th>
+                            <th><i class="fas fa-snowflake" style="margin-right:7px;color:var(--gold-light)"></i>Boiler
+                                Insulated</th>
+                            <th><i class="fas fa-tint" style="margin-right:7px;color:var(--gold-light)"></i>Boiler
+                                Standard</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fn">Material</td>
+                            <td>Traditional / Steel</td>
+                            <td>Stainless Steel</td>
+                            <td>Stainless Steel</td>
+                        </tr>
+                        <tr>
+                            <td class="fn">Smokeless</td>
+                            <td><span class="ck">✓ 100%</span></td>
+                            <td><span class="ck">✓ Yes</span></td>
+                            <td><span class="ck">✓ Yes</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fn">Insulation</td>
+                            <td>—</td>
+                            <td><span class="ck">✓ Premium</span></td>
+                            <td>Standard</td>
+                        </tr>
+                        <tr>
+                            <td class="fn">Durability</td>
+                            <td>20+ years</td>
+                            <td>20+ years</td>
+                            <td>20+ years</td>
+                        </tr>
+                        <tr>
+                            <td class="fn">Best For</td>
+                            <td>Traditional cooking</td>
+                            <td>Max efficiency</td>
+                            <td>Budget-conscious</td>
+                        </tr>
+                        <tr>
+                            <td class="fn">Price Range</td>
+                            <td style="color:var(--secondary);font-weight:700">Most Affordable</td>
+                            <td style="color:var(--primary);font-weight:700">Premium</td>
+                            <td style="color:#555;font-weight:700">Mid-Range</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <section id="testimonials" style="background:white;max-width:100%">
+        <div style="max-width:1400px;margin:0 auto;padding:6rem 2rem">
+            <div class="divider rv"></div>
+            <h2 class="section-title rv">What Our Customers Say</h2>
+            <p class="section-subtitle rv">Real stories from satisfied families across coastal Karnataka</p>
+
+            <div class="testi-grid">
+                <div class="testi-card rv d1">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-txt">"The Astra Ole has completely changed my kitchen life. No more smoke, no more
+                        burnt eyes. I use agricultural waste and save so much on fuel costs. Best investment for my
+                        family!"</p>
+                    <div class="auth-wrap">
+                        <div class="auth-av">SM</div>
+                        <div>
+                            <div class="auth-name">Shilpa Menon</div>
+                            <div class="auth-loc"><i class="fas fa-map-marker-alt" style="font-size:.68rem"></i>
+                                Bantwal, Mangalore</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card rv d2">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-txt">"The insulated boiler keeps water hot for hours. Our household water bills are
+                        down significantly and my family is so happy with this switch to Majal products."</p>
+                    <div class="auth-wrap">
+                        <div class="auth-av">RK</div>
+                        <div>
+                            <div class="auth-name">Ravi Kumar</div>
+                            <div class="auth-loc"><i class="fas fa-map-marker-alt" style="font-size:.68rem"></i> Udupi,
+                                Karnataka</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card rv d3">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-txt">"We installed 3 stoves for our restaurant. The smokeless technology and fuel
+                        efficiency have saved us thousands monthly. Customer support is exceptional. True
+                        professionals!"</p>
+                    <div class="auth-wrap">
+                        <div class="auth-av">AJ</div>
+                        <div>
+                            <div class="auth-name">Ajay Jayaram</div>
+                            <div class="auth-loc"><i class="fas fa-map-marker-alt" style="font-size:.68rem"></i>
+                                Restaurant Owner, Mangalore</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card rv d1">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-txt">"The warranty and after-sales service are impeccable. My boiler had a small
+                        issue after 2 years, and they fixed it free of charge. That's what I call quality commitment!"
+                    </p>
+                    <div class="auth-wrap">
+                        <div class="auth-av">PP</div>
+                        <div>
+                            <div class="auth-name">Priya Prabhu</div>
+                            <div class="auth-loc"><i class="fas fa-map-marker-alt" style="font-size:.68rem"></i> Coastal
+                                Karnataka</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card rv d2">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-txt">"Finally, a traditional cooking experience without all the health hazards. My
+                        mother loves the Astra Ole. The entire installation process was smooth and hassle-free."</p>
+                    <div class="auth-wrap">
+                        <div class="auth-av">VN</div>
+                        <div>
+                            <div class="auth-name">Vikram Nayak</div>
+                            <div class="auth-loc"><i class="fas fa-map-marker-alt" style="font-size:.68rem"></i>
+                                Dakshina Kannada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card rv d3">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-txt">"Excellent products at competitive prices. The team explained every feature and
+                        helped me choose the right boiler for my needs. Very knowledgeable and friendly!"</p>
+                    <div class="auth-wrap">
+                        <div class="auth-av">LS</div>
+                        <div>
+                            <div class="auth-name">Lakshmi S.</div>
+                            <div class="auth-loc"><i class="fas fa-map-marker-alt" style="font-size:.68rem"></i> Puttur,
+                                Mangalore</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ GALLERY ═══ -->
+    <section id="gallery" style="background:var(--bg-warm);max-width:100%">
+        <div style="max-width:1400px;margin:0 auto;padding:6rem 2rem">
+            <div class="divider rv"></div>
+            <h2 class="section-title rv">Our Gallery</h2>
+            <p class="section-subtitle rv">See our products in action and customer installations</p>
+
+            <div class="gal-grid">
+                <div class="gi rv d1" onclick="openLb(this)">
+                    <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-6.png"
+                        alt="SS Boiler Standard">
+                    <div class="gal-ov">
+                        <div class="gal-ov-txt"><i class="fas fa-expand-alt"></i> SS Boiler Standard</div>
+                    </div>
+                </div>
+                <div class="gi rv d2" onclick="openLb(this)">
+                    <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-4.png"
+                        alt="SS Boiler Insulated">
+                    <div class="gal-ov">
+                        <div class="gal-ov-txt"><i class="fas fa-expand-alt"></i> Insulated Boiler</div>
+                    </div>
+                </div>
+                <div class="gi rv d3" onclick="openLb(this)">
+                    <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-7.png"
+                        alt="3-in-1 Astra Ole">
+                    <div class="gal-ov">
+                        <div class="gal-ov-txt"><i class="fas fa-expand-alt"></i> 3-in-1 Astra Ole</div>
+                    </div>
+                </div>
+                <div class="gi rv d4" onclick="openLb(this)">
+                    <img src="http://www.majalproductions.com/wp-content/uploads/2019/05/Majal-Production.png"
+                        alt="Production Setup">
+                    <div class="gal-ov">
+                        <div class="gal-ov-txt"><i class="fas fa-expand-alt"></i> Production Setup</div>
+                    </div>
+                </div>
+                <div class="gi rv d5" onclick="openLb(this)">
+                    <img src="http://www.majalproductions.com/wp-content/uploads/2023/01/Untitled-design-4.png"
+                        alt="Boiler System">
+                    <div class="gal-ov">
+                        <div class="gal-ov-txt"><i class="fas fa-expand-alt"></i> Boiler System</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lbox" id="lbox" onclick="closeLb()">
+        <button class="lbox-close" onclick="closeLb()">×</button>
+        <img id="lbImg" src="" alt="">
+    </div>
+
+    <!-- ═══ FAQ ═══ -->
+    <section id="faq" style="background:white;max-width:100%">
+        <div style="max-width:1400px;margin:0 auto;padding:6rem 2rem">
+            <div class="divider rv"></div>
+            <h2 class="section-title rv">Frequently Asked Questions</h2>
+            <p class="section-subtitle rv">Everything you need to know about our products and services</p>
+
+            <div class="faq-cont">
+                <div class="faq-item act rv d1">
+                    <div class="faq-q"><span>What makes the Astra Ole different from traditional mud stoves?</span><span
+                            class="faq-ico">▼</span></div>
+                    <div class="faq-a">
+                        <p>The Majal 3-in-1 Astra Ole is a revolutionary smokeless burner that combines cooking and
+                            water heating in a single fire. Unlike traditional mud stoves that produce excessive smoke
+                            and waste fuel, our Astra Ole is 100% smokeless, fuel-efficient, and can use agricultural
+                            waste as firewood. It provides a clean, healthy kitchen environment while being economical.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item rv d2">
+                    <div class="faq-q"><span>How long do your products last?</span><span class="faq-ico">▼</span></div>
+                    <div class="faq-a">
+                        <p>All our products are engineered for durability and are guaranteed to last 20+ years with
+                            proper maintenance. Our stainless steel boilers are rust-free and have been tested for
+                            quality and leakage. We stand behind the longevity of our products with comprehensive
+                            warranties.</p>
+                    </div>
+                </div>
+                <div class="faq-item rv d3">
+                    <div class="faq-q"><span>Is installation difficult?</span><span class="faq-ico">▼</span></div>
+                    <div class="faq-a">
+                        <p>No, installation is straightforward and hassle-free. Our team provides professional
+                            installation guidance and support. We ensure that your product is installed correctly and
+                            you understand all its features and maintenance requirements. Most installations are
+                            completed within a day.</p>
+                    </div>
+                </div>
+                <div class="faq-item rv d4">
+                    <div class="faq-q"><span>What capacity options are available for boilers?</span><span
+                            class="faq-ico">▼</span></div>
+                    <div class="faq-a">
+                        <p>Our stainless steel boilers come in multiple capacity options to suit different family sizes
+                            and requirements. From compact sizes for small households to larger capacities for
+                            commercial use, we have options available. Please contact us to discuss the best capacity
+                            for your needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item rv d5">
+                    <div class="faq-q"><span>Can I use the Astra Ole for other purposes besides cooking?</span><span
+                            class="faq-ico">▼</span></div>
+                    <div class="faq-a">
+                        <p>Yes! The 3-in-1 Astra Ole is perfect for cooking rice, preparing other traditional dishes,
+                            and heating water for bathing. The single fire serves multiple purposes, making it
+                            incredibly versatile for households that follow traditional cooking practices.</p>
+                    </div>
+                </div>
+                <div class="faq-item rv">
+                    <div class="faq-q"><span>What is your warranty and after-sales service?</span><span
+                            class="faq-ico">▼</span></div>
+                    <div class="faq-a">
+                        <p>We provide comprehensive warranty coverage on all our products. Our dedicated after-sales
+                            service team is always ready to help with maintenance, repairs, and any questions you may
+                            have. We stand by our commitment to customer satisfaction and quality service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" style="background:var(--bg-warm);max-width:100%">
+        <div style="max-width:1400px;margin:0 auto;padding:6rem 2rem">
+            <div class="divider rv"></div>
+            <h2 class="section-title rv">Get In Touch</h2>
+            <p class="section-subtitle rv">Have questions? We'd love to hear from you. Reach out and we'll respond
+                promptly.</p>
+
+            <div class="contact-grid">
+                <div class="cf-wrap rvl">
+                    <h3>Send Us a Message</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-row2">
+                            <div class="fg"><label for="name">Full Name</label><input type="text" id="name"
+                                    placeholder="Your name" required></div>
+                            <div class="fg"><label for="phone">Phone</label><input type="tel" id="phone"
+                                    placeholder="Your phone" required></div>
+                        </div>
+                        <div class="fg"><label for="email">Email Address</label><input type="email" id="email"
+                                placeholder="your@email.com" required></div>
+                        <div class="fg"><label for="subject">Subject</label><input type="text" id="subject"
+                                placeholder="What's this about?" required></div>
+                        <div class="fg"><label for="message">Message</label><textarea id="message"
+                                placeholder="Tell us about your requirements..." required></textarea></div>
+                        <button type="submit" class="btn btn-rose"
+                            style="width:100%;justify-content:center;font-size:.95rem"><i
+                                class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                </div>
+
+                <div class="ci-wrap rvr">
+                    <div class="ic">
+                        <div class="ic-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p><a href="tel:9164750114">91 6475 0114</a></p>
+                            <p><a href="tel:7019243743">70 1924 3743</a></p>
+                        </div>
+                    </div>
+                    <div class="ic">
+                        <div class="ic-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:themajalproductions@gmail.com">themajalproductions@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="ic">
+                        <div class="ic-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>Lobo Compound, Jakribettu</p>
+                            <p>Bantwal, 574211</p>
+                            <p>Dakshina Kannada (Mangaluru), Karnataka, India</p>
+                        </div>
+                    </div>
+                    <div class="ic">
+                        <div class="ic-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>Monday – Saturday: 9:00 AM – 6:00 PM</p>
+                            <p>Sunday: 10:00 AM – 4:00 PM</p>
+                            <p style="color:var(--accent);font-size:.82rem;margin-top:.3rem">Closed on National
+                                Festivals</p>
+                            <div class="soc-row">
+                                <a href="https://www.facebook.com/Majalproductions/" class="soc-btn fb"
+                                    target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.youtube.com/channel/UCo-PfEiKj1yoS0dsn-_TnRw" class="soc-btn yt"
+                                    target="_blank"><i class="fab fa-youtube"></i></a>
+                                <a href="https://www.instagram.com/" class="soc-btn ig" target="_blank"><i
+                                        class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <div class="fl-logo" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                        <img src="Majal-Production-1.png" alt="Majal Productions Logo"
+                            style="height: 50px; width: auto; object-fit: contain;">
+                        <div class="logo-text-footer">
+                            <span class="main"
+                                style="display: block; font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: white;">Majal
+                                Productions</span>
+                        </div>
+                    </div>
+                    <p class="fl-desc">Trusted manufacturer of 100% smokeless stoves and premium boilers for over a
+                        decade. Serving coastal Karnataka with pride.</p>
+                    <div class="soc-row">
+                        <a href="https://www.facebook.com/Majalproductions/" class="soc-btn fb" target="_blank"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/channel/UCo-PfEiKj1yoS0dsn-_TnRw" class="soc-btn yt"
+                            target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/" class="soc-btn ig" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="fc">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="fc">
+                    <h4>Our Products</h4>
+                    <ul>
+                        <li><a href="#products">Majal 3-in-1 Astra Ole</a></li>
+                        <li><a href="#products">SS Boiler – Insulated</a></li>
+                        <li><a href="#products">SS Boiler – Standard</a></li>
+                    </ul>
+                </div>
+                <div class="fc">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="mailto:themajalproductions@gmail.com">Email Support</a></li>
+                        <li><a href="tel:9164750114">Call Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Majal Productions. All rights reserved.</p>
+                <p>Designed by <a href="#">AppVerteX</a> &nbsp;&nbsp; <span style="color:#E8595A"></span> </p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="stt" id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i
+            class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // ── Nav pill ───────────────────────────────
+        const navTabs = document.getElementById('navTabs');
+        const navPill = document.getElementById('navPill');
+        const navLinks = document.querySelectorAll('.nl');
+
+        function movePill(el) {
+            if (!navTabs || !navPill || !el) return;
+            const r = el.getBoundingClientRect();
+            const tr = navTabs.getBoundingClientRect();
+            navPill.style.width = r.width + 'px';
+            navPill.style.left = (r.left - tr.left + 6) + 'px';
+        }
+
+        window.addEventListener('load', () => {
+            const a = document.querySelector('.nl.active');
+            if (a) movePill(a);
+        });
+
+        if (navTabs) {
+            navLinks.forEach(l => {
+                l.addEventListener('mouseenter', () => movePill(l));
+            });
+            navTabs.addEventListener('mouseleave', () => {
+                const a = document.querySelector('.nl.active');
+                if (a) movePill(a);
+            });
+        }
+
+        // ── Active section highlight ───────────────
+        const secs = document.querySelectorAll('section[id]');
+        function setActive() {
+            let cur = 'home';
+            secs.forEach(s => { if (s.getBoundingClientRect().top <= 110) cur = s.id; });
+            navLinks.forEach(l => {
+                const on = l.dataset.sec === cur;
+                l.classList.toggle('active', on);
+                if (on) movePill(l);
+            });
+        }
+
+        // ── Scroll handler ─────────────────────────
+        const hdr = document.getElementById('hdr');
+        const stt = document.getElementById('stt');
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (hdr) {
+                hdr.style.background = y > 50 ? 'rgba(251,245,243,.97)' : 'rgba(251,245,243,.88)';
+                hdr.style.boxShadow = y > 50 ? '0 4px 30px rgba(107,30,47,.14)' : '0 4px 30px rgba(107,30,47,.08)';
+            }
+            if (stt) stt.classList.toggle('on', y > 400);
+            setActive();
+        }, { passive: true });
+
+        // ── Hamburger ──────────────────────────────
+        const hamBtn = document.getElementById('hamBtn');
+        const mNav = document.getElementById('mNav');
+        hamBtn && hamBtn.addEventListener('click', () => {
+            hamBtn.classList.toggle('open');
+            mNav.classList.toggle('open');
+        });
+        document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+            hamBtn.classList.remove('open');
+            mNav.classList.remove('open');
+        }));
+        document.addEventListener('click', e => {
+            if (!e.target.closest('header') && !e.target.closest('.mobile-nav')) {
+                hamBtn && hamBtn.classList.remove('open');
+                mNav && mNav.classList.remove('open');
+            }
+        });
+
+        // ── FAQ ───────────────────────────────────
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-q').addEventListener('click', () => {
+                const was = item.classList.contains('act');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('act'));
+                if (!was) item.classList.add('act');
+            });
+        });
+
+        // ── Scroll reveal ──────────────────────────
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.rv,.rvl,.rvr,.rvs').forEach(el => ro.observe(el));
+
+        // ── Counter animation ──────────────────────
+        function animCount(el) {
+            const target = parseInt(el.dataset.target);
+            const suffix = el.querySelector('span')?.textContent || '';
+            let start = 0, t0;
+            const step = ts => {
+                if (!t0) t0 = ts;
+                const p = Math.min((ts - t0) / 1800, 1);
+                const e = 1 - Math.pow(1 - p, 3);
+                el.innerHTML = Math.floor(e * target) + '<span>' + suffix + '</span>';
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+        const statsRow = document.querySelector('.stats-row');
+        if (statsRow) {
+            const so = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.querySelectorAll('.stat-number').forEach(animCount);
+                        so.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            so.observe(statsRow);
+        }
+
+        // ── Lightbox ───────────────────────────────
+        const lbox = document.getElementById('lbox');
+        const lbImg = document.getElementById('lbImg');
+        function openLb(item) {
+            const img = item.querySelector('img');
+            lbImg.src = img.src;
+            lbImg.alt = img.alt;
+            lbox.classList.add('on');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLb() {
+            lbox.classList.remove('on');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+        // ── Form submission ────────────────────────
+        function handleSubmit(ev) {
+            ev.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+            window.location.href = `mailto:themajalproductions@gmail.com?subject=Contact%20from%20${encodeURIComponent(name)}&body=Name:%20${encodeURIComponent(name)}%0APhone:%20${encodeURIComponent(phone)}%0AEmail:%20${encodeURIComponent(email)}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
+            ev.target.reset();
+        }
+
+        // ── Smooth scroll for all anchors ──────────
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const tgt = document.querySelector(a.getAttribute('href'));
+                if (tgt) { e.preventDefault(); window.scrollTo({ top: tgt.getBoundingClientRect().top + window.scrollY - 85, behavior: 'smooth' }); }
+            });
+        });
+    </script>
+</body>
+
+</html>
