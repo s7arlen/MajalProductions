@@ -272,59 +272,86 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
+        /* ── MOBILE NAV (AppVertex Style) ── */
         .mobile-nav {
             position: fixed;
-            top: var(--nav-height);
-            left: 0;
+            top: 0;
             right: 0;
-            background: rgba(251, 245, 243, 0.97);
-            backdrop-filter: blur(30px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem;
+            bottom: 0;
+            width: 80%;
+            max-width: 320px;
+            background: rgba(251, 245, 243, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 2000;
+            display: flex;
             flex-direction: column;
-            gap: 0.25rem;
-            transform: translateY(-20px);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 20px 50px rgba(107, 30, 47, 0.15);
-            z-index: 999;
+            padding: 5rem 2rem 2rem;
+            transform: translateX(100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
         }
 
         .mobile-nav.open {
-            transform: translateY(0);
+            transform: translateX(0);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(43, 43, 43, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 1999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .nav-overlay.on {
             opacity: 1;
             pointer-events: all;
-            display: flex;
         }
 
         .mobile-nav a {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem 1.2rem;
+            gap: 1.2rem;
+            padding: 1.2rem 0;
             text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 0.95rem;
-            border-radius: 10px;
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(107, 30, 47, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav a i {
+            width: 24px;
+            color: var(--secondary);
+            font-size: 1.2rem;
         }
 
         .mobile-nav a:hover {
-            background: var(--bg-warm);
-            border-left-color: var(--secondary);
-            color: var(--primary);
+            color: var(--secondary);
+            padding-left: 5px;
         }
 
         .mobile-nav .mob-cta {
-            margin-top: 0.5rem;
+            margin-top: auto;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white !important;
             justify-content: center;
-            border-radius: 10px;
-            border-left: none !important;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            border-bottom: none;
+            box-shadow: 0 10px 25px rgba(107, 30, 47, 0.25);
+        }
+
+        body.menu-open {
+            overflow: hidden;
         }
 
         /* ── HERO ── */
@@ -1867,14 +1894,15 @@
         </div>
     </header>
 
+    <div class="nav-overlay" id="navOverlay"></div>
     <div class="mobile-nav" id="mNav">
-        <a href="#home"><i class="fas fa-home" style="width:20px;color:var(--secondary)"></i>Home</a>
-        <a href="#about"><i class="fas fa-seedling" style="width:20px;color:var(--secondary)"></i>About</a>
-        <a href="#products"><i class="fas fa-fire" style="width:20px;color:var(--secondary)"></i>Products</a>
-        <a href="#testimonials"><i class="fas fa-star" style="width:20px;color:var(--secondary)"></i>Testimonials</a>
-        <a href="#gallery"><i class="fas fa-images" style="width:20px;color:var(--secondary)"></i>Gallery</a>
-        <a href="#faq"><i class="fas fa-question-circle" style="width:20px;color:var(--secondary)"></i>FAQ</a>
-        <a href="#contact"><i class="fas fa-envelope" style="width:20px;color:var(--secondary)"></i>Contact</a>
+        <a href="#home"><i class="fas fa-home"></i>Home</a>
+        <a href="#about"><i class="fas fa-seedling"></i>About</a>
+        <a href="#products"><i class="fas fa-fire"></i>Products</a>
+        <a href="#testimonials"><i class="fas fa-star"></i>Reviews</a>
+        <a href="#gallery"><i class="fas fa-images"></i>Gallery</a>
+        <a href="#faq"><i class="fas fa-question-circle"></i>FAQ</a>
+        <a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
         <a href="#contact" class="mob-cta"><i class="fas fa-comments"></i> Get a Quote</a>
     </div>
 
@@ -2510,20 +2538,22 @@
         // ── Hamburger ──────────────────────────────
         const hamBtn = document.getElementById('hamBtn');
         const mNav = document.getElementById('mNav');
-        hamBtn && hamBtn.addEventListener('click', () => {
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
+            if (!hamBtn || !mNav || !navOverlay) return;
             hamBtn.classList.toggle('open');
             mNav.classList.toggle('open');
-        });
+            navOverlay.classList.toggle('on');
+            document.body.classList.toggle('menu-open');
+        }
+
+        hamBtn && hamBtn.addEventListener('click', toggleMenu);
+        navOverlay && navOverlay.addEventListener('click', toggleMenu);
+
         document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
-            hamBtn.classList.remove('open');
-            mNav.classList.remove('open');
+            if (mNav && mNav.classList.contains('open')) toggleMenu();
         }));
-        document.addEventListener('click', e => {
-            if (!e.target.closest('header') && !e.target.closest('.mobile-nav')) {
-                hamBtn && hamBtn.classList.remove('open');
-                mNav && mNav.classList.remove('open');
-            }
-        });
 
         // ── FAQ ───────────────────────────────────
         document.querySelectorAll('.faq-item').forEach(item => {
